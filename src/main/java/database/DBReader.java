@@ -11,6 +11,10 @@ public class DBReader extends DataBase {
         super();
         connectToBD(server, port, login, password, service);
     }
+    public DBReader(){
+        super();
+        connectToBD();
+    }
 
     public String getHTMLTable(String table, String neededColumns) {
         try {
