@@ -93,16 +93,6 @@ public class MainController {
             requestColumns += String.format("\"%s\"", columns[i].toLowerCase());
         }
 
-        for (int i = 0; i < splittedValues.length; i++) {
-            String[] splittedRow = splittedValues[i].split(",");
-            if (!requestToInsert.equals("")) requestToInsert += "), (";
-            for (int j = 0; j < splittedRow.length; j++) {
-                if (j != 0) requestToInsert += ", ";
-                requestToInsert += String.format("'%s'", splittedRow[j]);
-            }
-        }
-
-        requestToInsert = String.format(templateToInsert, tableName, requestColumns, requestToInsert);
         requestToGetMasks = String.format(templateToGetMasks, tableName, project, requestColumns);
 
         DataBase db = new DataBase();
@@ -110,14 +100,58 @@ public class MainController {
         if (db.isTableExists(tableName)) {
             try{
                 res = db.executeQuery(requestToGetMasks);
-                db.executeQueryWithoutResult(requestToInsert);
             }
             catch (PSQLException e){
                 System.out.println("Error occured while request " + e.getMessage());
                 return "Error occured while request " + e.getMessage();
             }
-            return "Values was successfully inserted";
         }
-        return String.format("Table with name %s doesn't exist", tableName);
+        else return String.format("Table with name %s doesn't exist", tableName);
+
+        for (int i = 0; i < splittedValues.length; i++) {
+            String[] splittedRow = splittedValues[i].split(",");
+            if (!requestToInsert.equals("")) requestToInsert += "), (";
+            for (int j = 0; j < splittedRow.length; j++) {
+                if (j != 0) requestToInsert += ", ";
+                String mask = getMaskByColumnName(columns[j], res);
+                if (mask.equals("")) return String.format("Column %s wasn't found in masks", columns[j]);
+                else{
+                    if (!isValueValidByMask(splittedRow[j], mask)) return String.format("Value %s isn't valid by mask %s", splittedRow[j], mask);
+                }
+                requestToInsert += String.format("'%s'", splittedRow[j]);
+            }
+        }
+
+        requestToInsert = String.format(templateToInsert, tableName, requestColumns, requestToInsert);
+
+        try{
+            db.executeQueryWithoutResult(requestToInsert);
+        }
+        catch (PSQLException e){
+            System.out.println("Error occured while request " + e.getMessage());
+            return "Error occured while request " + e.getMessage();
+        }
+        return "Values was successfully inserted";
+    }
+
+    private String getMaskByColumnName(String columnName, Table table) {
+        for (Row row : table.rows()) {
+            if (row.getString("column").equals(columnName.toLowerCase())) return row.getString("mask");
+        }
+        System.out.println("No column found");
+        return "";
+    }
+
+    private boolean isValueValidByMask(String value, String mask) {
+        if (mask.contains("regexp:")){
+
+        }
+        else if (mask.contains("script:")) {
+
+        }
+        else {
+
+        }
+        return true;
     }
 }

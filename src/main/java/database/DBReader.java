@@ -1,5 +1,6 @@
 package database;
 
+import org.postgresql.util.PSQLException;
 import org.sql2o.data.Column;
 import org.sql2o.data.Row;
 
@@ -13,7 +14,13 @@ public class DBReader extends DataBase {
     }
 
     public String getHTMLTable(String table, String neededColumns){
-        executeQuery(String.format("SELECT %s FROM %s", neededColumns, table));
+        try{
+            executeQuery(String.format("SELECT %s FROM %s", neededColumns, table));
+        }
+        catch (PSQLException e) {
+            System.out.println("Error occured while request " + e.getMessage());
+            return "";
+        }
         int tableRange = this.table.asList().size();
         List<Column> columns = this.table.columns();
         List<Row> rows = this.table.rows();
