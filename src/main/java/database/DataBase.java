@@ -35,6 +35,10 @@ public class DataBase {
 
         connection = new Sql2o(String.format("jdbc:postgresql://%s:%s/%s", server, port, service), login, password);
     }
+    public void connectToBD(String server, String port, String login, String password, String service) {
+
+        connection = new Sql2o(String.format("jdbc:postgresql://%s:%s/%s", server, port, service), login, password);
+    }
 
     public Table executeQuery(String request) {
         Connection con = connection.open();
