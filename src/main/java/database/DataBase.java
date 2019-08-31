@@ -7,7 +7,9 @@ import org.sql2o.data.Table;
 import webservice.AppProperties;
 
 import java.io.IOException;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -39,7 +41,20 @@ public class DataBase {
     public Table executeQuery(String request) {
         Connection con = connection.open();
         table = con.createQuery(request).executeAndFetchTable();
+        con.close();
         return table;
+    }
+
+    public void executeQueryWithoutResult(String request) {
+        Connection con = connection.open();
+        con.createQuery(request).executeUpdate();
+        con.close();
+    }
+
+    public boolean isTableExists(String tableName) {
+        String request = String.format("SELECT to_regclass('%s')", tableName);
+        table = this.executeQuery(request);
+        return table.rows().get(0).getString(0) != null;
     }
 
 }
