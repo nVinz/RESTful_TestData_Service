@@ -1,6 +1,7 @@
 package database;
 
 
+import org.postgresql.util.PSQLException;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.data.Table;
@@ -38,14 +39,14 @@ public class DataBase {
         connection = new Sql2o(String.format("jdbc:postgresql://%s:%s/%s", server, port, service), login, password);
     }
 
-    public Table executeQuery(String request) {
+    public Table executeQuery(String request) throws PSQLException {
         Connection con = connection.open();
         table = con.createQuery(request).executeAndFetchTable();
         con.close();
         return table;
     }
 
-    public void executeQueryWithoutResult(String request) {
+    public void executeQueryWithoutResult(String request) throws PSQLException {
         Connection con = connection.open();
         con.createQuery(request).executeUpdate();
         con.close();
@@ -53,7 +54,13 @@ public class DataBase {
 
     public boolean isTableExists(String tableName) {
         String request = String.format("SELECT to_regclass('%s')", tableName);
-        table = this.executeQuery(request);
+        try{
+            table = this.executeQuery(request);
+        }
+        catch (PSQLException e) {
+            System.out.println("Error occured while request " + e.getMessage());
+            return false;
+        }
         return table.rows().get(0).getString(0) != null;
     }
 
