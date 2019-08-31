@@ -42,6 +42,13 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.6</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.github.krraghavan/xeger -->
+        <dependency>
+            <groupId>com.github.krraghavan</groupId>
+            <artifactId>xeger</artifactId>
+            <version>1.0.0-RELEASE</version>
+        </dependency>
+
     </dependencies>
 
     <build>
