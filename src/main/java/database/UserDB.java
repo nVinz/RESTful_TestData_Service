@@ -1,5 +1,6 @@
 package database;
 
+import org.postgresql.util.PSQLException;
 import org.sql2o.Sql2o;
 
 import java.util.Properties;
@@ -18,7 +19,11 @@ public class UserDB extends DataBase {
     }
 
     public boolean checkRole(String project, String user) {
-        executeQuery(String.format("select count(*) from login where name = %s and role = %s", user, project));
+        try {
+            executeQuery(String.format("select count(*) from login where name = %s and role = %s", user, project));
+        } catch (PSQLException e) {
+            e.printStackTrace();
+        }
         String value = table.asList().get(0).get("count").toString();
         return false;
     }
