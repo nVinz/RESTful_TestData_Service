@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 	<title>TeReD</title>
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 <div class="parentflex">
@@ -13,6 +13,16 @@
 	<a class="buttonlist" href="">Создать ТД</a><br>
 	<a class="buttonlist" href="">Выгрузить ТД</a><br>
 	<a class="buttonlist" href="">Создать REST-запрос</a><br>
+</div>
+<div class="parentflex">
+	<a>
+		<select>
+			<option value="volvo">Таблица 1</option>
+			<option value="volvo">Таблица 2</option>
+		</select>
+		<a class="label">Маска</a>
+		<input type="text" class="input">
+	</a>
 </div>
 <div class="table">
 	<table border="2" cellpadding="20">
