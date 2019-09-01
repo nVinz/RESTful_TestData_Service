@@ -19,13 +19,13 @@ public class DataBase {
 
     public DataBase() {
         try {
-            properties.load(Objects.requireNonNull(Application.class.getClassLoader().getResourceAsStream("app.properties")));
+            properties.load(Objects.requireNonNull(Application.class.getClassLoader().getResourceAsStream("application.properties")));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // connect к БД по данным из app.properties
+    // connect к БД по данным из application.properties
     public void connectToBD() {
         String server, port, login, password, service;
         server = properties.get("db.host").toString();
