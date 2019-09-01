@@ -88,8 +88,8 @@ public class MainController {
             db.executeQueryWithoutResult(requestToCreate);
         }
         catch (PSQLException e) {
-            System.out.println("Error occured while request " + e.getMessage());
-            return "Error occured while request " + e.getMessage();
+            System.out.println("Error occurred while request " + e.getMessage());
+            return "Error occurred while request " + e.getMessage();
         }
 
         return "Table was successfully created";
@@ -120,8 +120,8 @@ public class MainController {
                 res = db.executeQuery(requestToGetMasks);
             }
             catch (PSQLException e){
-                System.out.println("Error occured while request " + e.getMessage());
-                return "Error occured while request " + e.getMessage();
+                System.out.println("Error occurred while request " + e.getMessage());
+                return "Error occurred while request " + e.getMessage();
             }
         }
         else return String.format("Table with name %s doesn't exist", tableName);
@@ -145,8 +145,8 @@ public class MainController {
             db.executeQueryWithoutResult(requestToInsert);
         }
         catch (PSQLException e){
-            System.out.println("Error occured while request " + e.getMessage());
-            return "Error occured while request " + e.getMessage();
+            System.out.println("Error occurred while request " + e.getMessage());
+            return "Error occurred while request " + e.getMessage();
         }
         return "Values was successfully inserted";
     }
@@ -198,8 +198,8 @@ public class MainController {
                 }
             }
             catch (PSQLException e){
-                System.out.println("Error occured while request " + e.getMessage());
-                return Collections.singleton("Error occured while request " + e.getMessage());
+                System.out.println("Error occurred while request " + e.getMessage());
+                return Collections.singleton("Error occurred while request " + e.getMessage());
             }
         }
         else return Collections.singleton(String.format("Table with name %s doesn't exist", tableName));
@@ -228,9 +228,9 @@ public class MainController {
             db.executeQueryWithoutResult(requestToInsert);
         }
         catch (PSQLException e){
-            System.out.println("Error occured while request " + e.getMessage());
+            System.out.println("Error occurred while request " + e.getMessage());
 
-            return Collections.singleton("Error occured while request " + e.getMessage());
+            return Collections.singleton("Error occurred while request " + e.getMessage());
         }
         return col;
     }
@@ -270,8 +270,8 @@ public class MainController {
                 res = db.executeQuery(requestToGetValues);
             }
             catch (PSQLException e){
-                System.out.println("Error occured while request " + e.getMessage());
-                return Collections.singleton("Error occured while request " + e.getMessage());
+                System.out.println("Error occurred while request " + e.getMessage());
+                return Collections.singleton("Error occurred while request " + e.getMessage());
             }
         }
         else return Collections.singleton(String.format("Table with name %s doesn't exist", tableName));
@@ -290,9 +290,9 @@ public class MainController {
 //            db.executeQueryWithoutResult(requestToInsert);
 //        }
 //        catch (PSQLException e){
-//            System.out.println("Error occured while request " + e.getMessage());
+//            System.out.println("Error occurred while request " + e.getMessage());
 //
-//            return Collections.singleton("Error occured while request " + e.getMessage());
+//            return Collections.singleton("Error occurred while request " + e.getMessage());
 //        }
         return Collections.singleton(rows);
     }

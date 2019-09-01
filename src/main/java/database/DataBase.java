@@ -71,4 +71,27 @@ public class DataBase {
         return table.rows().get(0).getString(0) != null;
     }
 
+    public boolean setDBEnvironment() {
+        String requestToCreateLoginDB = "CREATE TABLE login (user text, project text, role text, hash text)";
+        String requestToCreateMasksDB = "CREATE TABLE masks (column text, mask text, id bigint)";
+        String requestToCreateTablesDB = "CREATE TABLE tables (id bigint, name text, project text, description text)";
+
+        return makeExecutionIfDBNotExist(requestToCreateLoginDB, "login") && makeExecutionIfDBNotExist(requestToCreateMasksDB, "masks") && makeExecutionIfDBNotExist(requestToCreateTablesDB, "tables");
+    }
+
+    private boolean makeExecutionIfDBNotExist(String request, String tableName){
+        DataBase db = new DataBase();
+        db.connectToBD();
+        if (!db.isTableExists(tableName)) {
+            try {
+                db.executeQueryWithoutResult(request);
+            }
+            catch (PSQLException e) {
+                System.out.println("Error occurred while request " + e.getMessage());
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
