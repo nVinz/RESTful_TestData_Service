@@ -5,12 +5,9 @@ import org.postgresql.util.PSQLException;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.data.Table;
-import webservice.AppProperties;
+import webservice.Application;
 
 import java.io.IOException;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -22,7 +19,7 @@ public class DataBase {
 
     public DataBase() {
         try {
-            properties.load(Objects.requireNonNull(AppProperties.class.getClassLoader().getResourceAsStream("app.properties")));
+            properties.load(Objects.requireNonNull(Application.class.getClassLoader().getResourceAsStream("app.properties")));
         } catch (IOException e) {
             e.printStackTrace();
         }

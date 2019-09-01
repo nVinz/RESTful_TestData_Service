@@ -16,6 +16,42 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Controller
 public class MainController {
 
+    @GetMapping(value = "/s")
+    @ResponseBody
+    public String testSys1() {
+        return "<!DOCTYPE html>\n" +
+                "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:th=\"https://www.thymeleaf.org\" xmlns:sec=\"https://www.thymeleaf.org/thymeleaf-extras-springsecurity3\">\n" +
+                "<head>\n" +
+                "\t<title>TeReD</title>\n" +
+                "\t<meta charset=\"UTF-8\">\n" +
+                "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"css/styles.css\">\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<div class=\"parentflex\">\n" +
+                "\t<a class=\"borderlabel\">User > Project</a><br>\n" +
+                "</div>\n" +
+                "<div class=\"parentinline\">\n" +
+                "\t<a class=\"buttonlist active\" disabled>Существующие ТД</a><br>\n" +
+                "\t<a class=\"buttonlist\" href=\"createPage.html\">Создать ТД</a><br>\n" +
+                "\t<a class=\"buttonlist\" href=\"importPage.html\">Импорт ТД</a><br>\n" +
+                "\t<a class=\"buttonlist\" href=\"\">Создать REST-запрос</a><br>\n" +
+                "</div>\n" +
+                "<div class=\"parentflex\">\n" +
+                "\t<a>\n" +
+                "\t\t<a class=\"label\">Маска</a>\n" +
+                "\t\t<input id=\"filterInput\" type=\"text\" class=\"input\">\n" +
+                "        <button type=\"submit\" id=\"updateTable\">Обновить\n" +
+                "        </button>\n" +
+                "\t</a>\n" +
+                "</div>\n" +
+                "<div id=\"mainTable\" class=\"table\">\n" +
+                "</div>\n" +
+                "<script src=\"js/jquery.min.js\"></script>\n" +
+                "<script src=\"js/mainPage.js\"></script>\n" +
+                "</body>\n" +
+                "</html>";
+    }
+
     @GetMapping(value = "/test")
     @ResponseBody
     public String testSys(){

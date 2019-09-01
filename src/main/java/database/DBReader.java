@@ -31,7 +31,7 @@ public class DBReader extends DataBase {
     // выполнение запроса с маской и вывод HTML таблицы
     public String getFilteredHTMLTable(String table, String neededColumns, String filteredColumn, String mask, String tableStyle) {
         if (!mask.equals(""))
-            mask = String.format(" WHERE %s like '%s'", filteredColumn, mask);
+            mask = String.format(" WHERE %s like '%s'", filteredColumn, "%" + mask + "%");
         try {
             executeQuery(String.format("SELECT %s FROM %s%s", neededColumns, table, mask));
         } catch (PSQLException e) {
