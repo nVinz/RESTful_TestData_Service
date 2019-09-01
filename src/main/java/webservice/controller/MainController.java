@@ -215,7 +215,12 @@ public class MainController {
             }
         }
 
-        Collection col = Collections.singleton(requestToInsert.split("\\), \\("));
+        String[] rows = requestToInsert.split("\\), \\(");
+        String[][] values = new String[rows.length][];
+        for (int i = 0; i < rows.length; i++) {
+            values[i] = rows[i].split(", ");
+        }
+        Collection col = Collections.singleton(values);
 
         requestToInsert = String.format(templateToInsert, tableName, requestColumns, requestToInsert);
 
