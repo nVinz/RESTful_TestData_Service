@@ -9,9 +9,9 @@
 	<a class="borderlabel">User > Project</a><br>
 </div>
 <div class="parentinline">
-	<a class="buttonlist" href="">Существующие ТД</a><br>
-	<a class="buttonlist" href="">Создать ТД</a><br>
-	<a class="buttonlist" href="">Выгрузить ТД</a><br>
+	<a class="buttonlist active" disabled>Существующие ТД</a><br>
+	<a class="buttonlist" href="createPage.html">Создать ТД</a><br>
+	<a class="buttonlist" href="importPage.html">Импорт ТД</a><br>
 	<a class="buttonlist" href="">Создать REST-запрос</a><br>
 </div>
 <div class="parentflex">
@@ -21,8 +21,22 @@
 			<option value="volvo">Таблица 2</option>
 		</select>
 		<a class="label">Маска</a>
-		<input id="filterBox" type="text" class="input">
+		<input type="text" class="input">
 	</a>
+</div>
+<div class="table">
+	<table border="2" cellpadding="20">
+		<tbody>
+		<tr>
+			<td>&nbsp;ID</td>
+			<td>&nbsp;NAME</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		</tbody>
+	</table>
 </div>
 <div id="mainTable" class="table">
 </div>
