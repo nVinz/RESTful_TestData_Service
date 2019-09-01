@@ -18,18 +18,18 @@ public class DBReader extends DataBase {
     }
 
     // выполнение запроса и вывод HTML таблицы
-    public String getHTMLTable(String table, String neededColumns) {
+    public String getHTMLTable(String table, String neededColumns, String tableStyle) {
         try {
             executeQuery(String.format("SELECT %s FROM %s", neededColumns, table));
         } catch (PSQLException e) {
             System.out.println("Error occured while request " + e.getMessage());
             return "";
         }
-         return buildHTMLTableByResult();
+         return buildHTMLTableByResult(tableStyle);
     }
 
     // выполнение запроса с маской и вывод HTML таблицы
-    public String getFilteredHTMLTable(String table, String neededColumns, String filteredColumn, String mask) {
+    public String getFilteredHTMLTable(String table, String neededColumns, String filteredColumn, String mask, String tableStyle) {
         if (!mask.equals(""))
             mask = String.format(" WHERE %s like '%s'", filteredColumn, mask);
         try {
@@ -39,15 +39,15 @@ public class DBReader extends DataBase {
             return "";
         }
 
-        return buildHTMLTableByResult();
+        return buildHTMLTableByResult(tableStyle);
 
     }
 
     // построение HTML талицы из результата SQL запроса
-    private String buildHTMLTableByResult(){
+    private String buildHTMLTableByResult(String tableStyle){
         List<Column> columns = this.table.columns();
         List<Row> rows = this.table.rows();
-        StringBuilder html = new StringBuilder("<table><tr>");
+        StringBuilder html = new StringBuilder(String.format("<table%s><tr>", tableStyle));
         columns.forEach(c -> html.append(String.format("<th>%s</th>", c.getName())));
         html.append("</tr>");
         for (int i = 0; i < rows.size(); i++) {
