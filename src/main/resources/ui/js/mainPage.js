@@ -9,7 +9,7 @@ if (userHasAccess()) return
    data:{
         'tableName': 'tables',
         'columnName': 'name',
-        'filter': ${'#filterBox'}.getContext(),
+        'filter': ${'#filterInput'}.getContext(),
         'tableStyle': ' class=\"table\"'
    },
    success: function(result){
