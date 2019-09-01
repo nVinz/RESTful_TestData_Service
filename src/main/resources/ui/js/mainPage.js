@@ -18,3 +18,6 @@ if (userHasAccess()) return
         graphIsLoaded = true
       }});
 }
+function userHasAccess(){
+    return true;
+}
