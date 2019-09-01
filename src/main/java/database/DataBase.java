@@ -72,9 +72,9 @@ public class DataBase {
     }
 
     public boolean setDBEnvironment() {
-        String requestToCreateLoginDB = "CREATE TABLE login (user text, project text, role text, hash text)";
-        String requestToCreateMasksDB = "CREATE TABLE masks (column text, mask text, id bigint)";
-        String requestToCreateTablesDB = "CREATE TABLE tables (id bigint, name text, project text, description text)";
+        String requestToCreateLoginDB = "CREATE TABLE login (\"user\" text, \"project\" text, \"role\" text, \"hash\" text)";
+        String requestToCreateMasksDB = "CREATE TABLE masks (\"column\" text, \"mask\" text, \"id\" bigint)";
+        String requestToCreateTablesDB = "CREATE TABLE tables (\"id\" bigint, \"name\" text, \"project\" text, \"description\" text)";
 
         return makeExecutionIfDBNotExist(requestToCreateLoginDB, "login") && makeExecutionIfDBNotExist(requestToCreateMasksDB, "masks") && makeExecutionIfDBNotExist(requestToCreateTablesDB, "tables");
     }

@@ -1,5 +1,6 @@
 package webservice;
 
+import database.DataBase;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -21,6 +22,9 @@ public class Application {
         properties.put("server.address", AppProperties.getInstance().getHost());
         application.setDefaultProperties(properties);
 
+        DataBase db = new DataBase();
+        db.connectToBD();
+        db.setDBEnvironment();
 
         context = application.run(args);
     }
