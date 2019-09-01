@@ -28,6 +28,7 @@ public class DataBase {
         }
     }
 
+    // connect к БД по данным из app.properties
     public void connectToBD() {
         String server, port, login, password, service;
         server = properties.get("db.host").toString();
@@ -38,6 +39,7 @@ public class DataBase {
 
         connection = new Sql2o(String.format("jdbc:postgresql://%s:%s/%s", server, port, service), login, password);
     }
+
     public void connectToBD(String server, String port, String login, String password, String service) {
 
         connection = new Sql2o(String.format("jdbc:postgresql://%s:%s/%s", server, port, service), login, password);
@@ -50,6 +52,7 @@ public class DataBase {
         return table;
     }
 
+    // insert/update/drop запросы
     public void executeQueryWithoutResult(String request) throws PSQLException {
         Connection con = connection.open();
         con.createQuery(request).executeUpdate();

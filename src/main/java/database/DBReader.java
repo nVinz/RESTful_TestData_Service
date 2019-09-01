@@ -11,11 +11,13 @@ public class DBReader extends DataBase {
         super();
         connectToBD(server, port, login, password, service);
     }
+
     public DBReader(){
         super();
         connectToBD();
     }
 
+    // выполнение запроса и вывод HTML таблицы
     public String getHTMLTable(String table, String neededColumns) {
         try {
             executeQuery(String.format("SELECT %s FROM %s", neededColumns, table));
@@ -26,15 +28,10 @@ public class DBReader extends DataBase {
          return buildHTMLTableByResult();
     }
 
+    // выполнение запроса с маской и вывод HTML таблицы
     public String getFilteredHTMLTable(String table, String neededColumns, String filteredColumn, String mask) {
         if (!mask.equals(""))
             mask = String.format(" WHERE %s like '%s'", filteredColumn, mask);
-//        if (mask.charAt(0) != '^') {
-//            mask = "%" + mask;
-//        }
-//        if (mask.charAt(mask.length() - 1) != '$'){
-//            mask = mask + "%";
-//        }
         try {
             executeQuery(String.format("SELECT %s FROM %s%s", neededColumns, table, mask));
         } catch (PSQLException e) {
@@ -46,6 +43,7 @@ public class DBReader extends DataBase {
 
     }
 
+    // построение HTML талицы из результата SQL запроса
     private String buildHTMLTableByResult(){
         List<Column> columns = this.table.columns();
         List<Row> rows = this.table.rows();
