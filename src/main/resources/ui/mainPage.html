@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 	<title>TeReD</title>
-	<link rel="stylesheet" type="text/css" href="styles.css">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
 <div class="parentflex">
@@ -21,10 +21,10 @@
 			<option value="volvo">Таблица 2</option>
 		</select>
 		<a class="label">Маска</a>
-		<input type="text" class="input">
+		<input id="filterBox" type="text" class="input">
 	</a>
 </div>
-<div name="mainTable" class="table">
+<div id="mainTable" class="table">
 </div>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/mainPage.js"></script>

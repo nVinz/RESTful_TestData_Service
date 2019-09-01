@@ -12,7 +12,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class DataBaseController {
 
     // Метод возвращаем HTML таблицу (в тегах <table>) по имени таблицы
-    @RequestMapping(value = "/getTable{tableName}{tableStyle}", method = GET)
+    @RequestMapping(value = "/getHTMLTable{tableName}{tableStyle}", method = GET)
     @ResponseBody
     public String createTable(@RequestParam("tableName") String tableName,
                               @RequestParam("tableStyle") String tableStyle) {
@@ -21,7 +21,7 @@ public class DataBaseController {
     }
 
     // Метод возвращаем HTML таблицу (в тегах <table>) по имени таблицы с фильтром по колонке
-    @RequestMapping(value = "/getFilteredTable{tableName}{columnName}{filter}{tableStyle}", method = GET)
+    @RequestMapping(value = "/getFilteredHTMLTable{tableName}{columnName}{filter}{tableStyle}", method = GET)
     @ResponseBody
     public String createTable(@RequestParam("tableName") String tableName,
                               @RequestParam("columnName") String columnName,
